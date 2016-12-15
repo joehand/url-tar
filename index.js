@@ -4,7 +4,9 @@ var mime = require('mime-types')
 var request = require('request')
 var tar = require('tar-stream')
 
-module.exports = function (urls) {
+module.exports = function (urls, opts) {
+  opts = opts || {}
+  opts.addExt = opts.addExt || false
   if (typeof urls === 'string') urls = [urls]
   var pack = tar.pack()
   var pending = urls.length
@@ -30,7 +32,7 @@ module.exports = function (urls) {
     request(urlString, function (err, response, body) {
       if (err) cb(err)
       if (response.statusCode === 200) {
-        if (response.headers && response.headers['content-type']) {
+        if (response.headers && response.headers['content-type'] && opts.addExt) {
           var ext = mime.extension(response.headers['content-type'])
           if (!name.endsWith(ext)) name += '.' + ext
         }

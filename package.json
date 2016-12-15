@@ -9,6 +9,9 @@
   "author": "Joe Hand <joe@joeahand.com> (http://joeahand.com/)",
   "license": "ISC",
   "dependencies": {
+    "debug": "^2.4.4",
+    "mime-types": "^2.1.13",
+    "request": "^2.79.0",
     "tar-stream": "^1.5.2"
   },
   "devDependencies": {
